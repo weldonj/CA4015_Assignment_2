@@ -57,8 +57,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Summary and Learning Outcomes" href="Summary_Conclusion.html" />
-    <link rel="prev" title="Data Preprocessing" href="processing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -117,53 +115,53 @@
   Classification Model
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="classification.html">
    <strong>
     Classification of windowed time series without feature extraction
    </strong>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-binary-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-binary-data-classifier">
    Sklearn - Binary Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-three-label-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-three-label-data-classifier">
    Sklearn - Three-Label Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-multi-label-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-multi-label-data-classifier">
    Sklearn - Multi-Label Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#classification-of-windowed-time-series-data-with-extracted-features">
+  <a class="reference internal" href="classification.html#classification-of-windowed-time-series-data-with-extracted-features">
    <strong>
     Classification of Windowed Time Series Data with Extracted features
    </strong>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#pca-of-extracted-features">
+  <a class="reference internal" href="classification.html#pca-of-extracted-features">
    PCA of Extracted Features
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#binary-data-classifier">
+  <a class="reference internal" href="classification.html#binary-data-classifier">
    Binary Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#three-label-classifier">
+  <a class="reference internal" href="classification.html#three-label-classifier">
    Three-Label Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#multi-label-classifier">
+  <a class="reference internal" href="classification.html#multi-label-classifier">
    Multi-Label Classifier
   </a>
  </li>
@@ -219,7 +217,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/classification.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/assification.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -244,7 +242,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/classification.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/assification.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -860,7 +858,7 @@ Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.488491 to fit
 </pre></div>
 </div>
-<img alt="_images/classification_25_1.png" src="_images/classification_25_1.png" />
+<img alt="_images/assification_25_1.png" src="_images/assification_25_1.png" />
 </div>
 </div>
 </div>
@@ -1134,7 +1132,7 @@ weighted avg       0.87      0.91      0.87      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_31_0.png" src="_images/classification_31_0.png" />
+<img alt="_images/assification_31_0.png" src="_images/assification_31_0.png" />
 </div>
 </div>
 <p>The Decision Tree, and by extension the Random Forest algorithm, appear to be the best performing models for the binary classification.</p>
@@ -1535,10 +1533,9 @@ weighted avg       0.66      0.69      0.58      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_48_0.png" src="_images/classification_48_0.png" />
+<img alt="_images/assification_48_0.png" src="_images/assification_48_0.png" />
 </div>
 </div>
-<p>Again, Random Forest and Decision Tree outperform the other algorithms with an accuracy of ~0.85, with the rest of the models displaying accuracy of ~0.7</p>
 </div>
 <div class="section" id="id6">
 <h2>AutoML<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
@@ -1909,10 +1906,9 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_62_0.png" src="_images/classification_62_0.png" />
+<img alt="_images/assification_61_0.png" src="_images/assification_61_0.png" />
 </div>
 </div>
-<p>The addition of more labels again inhibits model performance and is penalising the algorithms which primarily guess the most frequent training label. RF and DT execute the highest accuracy of ~0.8 and ~0.75 respectively.</p>
 </div>
 <div class="section" id="id11">
 <h2>AutoML<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
@@ -3601,7 +3597,7 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_72_0.png" src="_images/classification_72_0.png" />
+<img alt="_images/assification_70_0.png" src="_images/assification_70_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -4148,7 +4144,7 @@ weighted avg       0.92      0.93      0.91      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_92_0.png" src="_images/classification_92_0.png" />
+<img alt="_images/assification_90_0.png" src="_images/assification_90_0.png" />
 </div>
 </div>
 <p>Classification on binary labelled data with extracted features yielded improved results in accuracy compared to that in the independent data point model earlier in the notebook. As shown, with the exception of Naive Bayes, all the algorithms displayed accuracy of above 90%. Decision Tree and Random Forest performed well again but K-nearest neighbours had the highest accuracy for this dataset with an accuracy of &gt; 95%. Upon inspection of the confusion matrix, there is no indication of the model guessing “Sleep” for all data points as shown in the false predictions for “Wake”.</p>
@@ -4474,7 +4470,7 @@ weighted avg       0.70      0.73      0.67      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_106_0.png" src="_images/classification_106_0.png" />
+<img alt="_images/assification_104_0.png" src="_images/assification_104_0.png" />
 </div>
 </div>
 <p>The models’ accuracies decrease as another label is added to the classification. K-Nearest Neighbours is the only model to achieve an accuracy of &gt; 0.9, with Decision Tree and RF closely following behind it.</p>
@@ -4928,7 +4924,7 @@ weighted avg       0.47      0.51      0.46      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_122_0.png" src="_images/classification_122_0.png" />
+<img alt="_images/assification_120_0.png" src="_images/assification_120_0.png" />
 </div>
 </div>
 <p>As expected, the models’ accuracies deteriorate again with the inclusion of the full label to the classification. Again, Decision Tree and Random Forest return high accuracies of ~0.8 but K-Nearest Neighbours is the most accurate with a score of 0.86.</p>
@@ -4996,8 +4992,6 @@ The models used can make an accurate prediction on sleep state given that window
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="processing.html" title="previous page">Data Preprocessing</a>
-    <a class='right-next' id="next-link" href="Summary_Conclusion.html" title="next page">Summary and Learning Outcomes</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
