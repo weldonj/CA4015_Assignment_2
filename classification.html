@@ -4922,7 +4922,7 @@ weighted avg       0.47      0.51      0.46      6605
 <p>#Evaluation of Model Performances
 As expected, we observe an improvement of model accuracy with addition of time series as opposed to taking each window as independent data points. An important note is that we acknowledge that the inclusion of patient ID in the time series classification model too but a look into feature significances shows how important time is.
 The models used can make an accurate prediction on sleep state given that window’s motion and heart rate, but the information from all the data preceding it is very important in maximising model performance and returning high accuracy of predictions.
-K-Nearest Neighbours was the best performing algorithm for the extracted feature data across two, three and five-label datasets.</p>
+K-Nearest Neighbours was the best performing algorithm for the extracted feature data across two, three and five-label datasets. Benefits of this include that K-NN algorithm is very simple to understand and equally easy to implement. To classify the new data point K-NN algorithm reads through whole dataset to find out K nearest neighbors and classifies that point with the mode of the neighbours’ labels. It’s suitable for this assignment due to its ease to adjust to multi-class problems. KNN has no capability of e</p>
 </div>
 </div>
 
