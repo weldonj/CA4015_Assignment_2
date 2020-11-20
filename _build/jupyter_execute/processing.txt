@@ -430,6 +430,3 @@ y_series = pd.Series(Y['1'])
 
 
 tsfresh.feature_selection.relevance.calculate_relevance_table(X, y_series, ml_task='classification').head(10)
-
-print(y_series.index)
-print(X.index)
