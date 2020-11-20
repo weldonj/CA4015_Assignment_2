@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CA4015 Assignment 2 - Sleep Classifcation &#8212; CA4015 Assignment 2 - Time Series Classification - Jack Boylan, Daniel O&#39;Boyle, John Weldon</title>
+    <title>Data Preprocessing &#8212; CA4015 Assignment 2 - Time Series Classification - Jack Boylan, Daniel O&#39;Boyle, John Weldon</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -103,7 +103,12 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   CA4015 Assignment 2 - Sleep Classifcation
+   Data Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#data-processing">
+   Data Processing
   </a>
  </li>
 </ul>
@@ -259,74 +264,64 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background-full-description-here">
-   Background - Full description here
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#understanding-the-dataset">
-   Understanding the Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-will-use-motion-and-acceleration-only-for-classification-assignment-2-as-step-count-will-not-be-useful-here">
-   <strong>
-    We will use motion and acceleration only for Classification (Assignment 2) as step count will not be useful here
-   </strong>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mount-drive">
-   Mount Drive
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-a-sample-of-data">
-   Load a sample of data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-sample-data">
-   Plot the sample data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-a-sample-of-labels">
-   Load a sample of Labels
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Data Preprocessing
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#removing-the-1-labels-no-point-classifying-a-class-we-don-t-know-the-meaning-for">
-     Removing the -1 labels: No point classifying a class we don’t know the meaning for
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mount-drive">
+     Mount Drive
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-a-sample-of-data">
+     Load a sample of data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-sample-data">
+     Plot the sample data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-a-sample-of-labels">
+     Load a sample of Labels
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tip">
+     Tip:
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tip">
-   Tip:
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-the-data-so-we-can-use-tsfresh-to-extract-the-time-series-features">
-   Processing the data so we can use tsfresh to extract the time series features
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#label-4">
-   Label “4”?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extracting-features">
-   Extracting features
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-processing">
+   Data Processing
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prep-the-dataset-for-tsfresh-package">
-     Prep the dataset for tsfresh package
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-the-data-so-we-can-use-tsfresh-to-extract-the-time-series-features">
+     Processing the data so we can use tsfresh to extract the time series features
     </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#label-4">
+     Label “4”?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extracting-features">
+     Extracting features
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prep-the-dataset-for-tsfresh-package">
+       Prep the dataset for tsfresh package
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -341,30 +336,8 @@
         
               <div>
                 
-  <div class="section" id="ca4015-assignment-2-sleep-classifcation">
-<h1>CA4015 Assignment 2 - Sleep Classifcation<a class="headerlink" href="#ca4015-assignment-2-sleep-classifcation" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="background-full-description-here">
-<h2>Background - <a class="reference external" href="https://physionet.org/content/sleep-accel/1.0.0/">Full description here</a><a class="headerlink" href="#background-full-description-here" title="Permalink to this headline">¶</a></h2>
-<p>Subjects in this trial wore an Apple Watch to collect their ambulatory activity patterns for a week before spending one night in a sleep lab. During that night, acceleration (in g) and heart rate (in beats per minute, bpm) were collected from the Apple Watch while they underwent polysomnography (PSG). Each type of data recorded from the Apple Watch and the labeled sleep from polysomnography is saved in a separate file, tagged with a random subject identifier.</p>
-</div>
-<div class="section" id="understanding-the-dataset">
-<h2>Understanding the Dataset<a class="headerlink" href="#understanding-the-dataset" title="Permalink to this headline">¶</a></h2>
-<p><em>The following types of data are provided:</em></p>
-<p><strong>motion (acceleration)</strong>: Saved as txt files with the naming convention ‘[subject-id-number]_acceleration.txt’</p>
-<p>Each line in this file has the format: date (in seconds since PSG start), x acceleration (in g), y acceleration, z acceleration</p>
-<p><strong>heart rate (bpm)</strong>: Saved as txt files with the naming convention ‘[subject-id-number]_heartrate.txt’</p>
-<p>Each line in this file has the format: date (in seconds since PSG start), heart rate (bpm)</p>
-<p><strong>steps (count)</strong>: Recorded from the Apple Watch and saved in the format ‘[subject-id-number]_steps.txt’</p>
-<p>Each line in this file has the format: date (in seconds since PSG start), steps (total in bin from this timestamp to next timestamp)</p>
-<p><strong>labeled sleep</strong>: Recorded from polysomnography and saved in the format ‘[subject-id-number]_labeled_sleep.txt’</p>
-<p>Each line in this file has the format: date (in seconds since PSG start) stage (0-5, wake = 0, N1 = 1, N2 = 2, N3 = 3, REM = 5)</p>
-<hr class="docutils" />
-</div>
-<hr class="docutils" />
-<div class="section" id="we-will-use-motion-and-acceleration-only-for-classification-assignment-2-as-step-count-will-not-be-useful-here">
-<h2><strong>We will use motion and acceleration only for Classification (Assignment 2) as step count will not be useful here</strong><a class="headerlink" href="#we-will-use-motion-and-acceleration-only-for-classification-assignment-2-as-step-count-will-not-be-useful-here" title="Permalink to this headline">¶</a></h2>
-</div>
+  <div class="section" id="data-preprocessing">
+<h1>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mount-drive">
 <h2>Mount Drive<a class="headerlink" href="#mount-drive" title="Permalink to this headline">¶</a></h2>
 <p>This is just where we load the data in colabs, this step may not be necessary depending on who is running it and what IDE they use</p>
@@ -445,8 +418,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/processing_8_0.png" src="_images/processing_8_0.png" />
-<img alt="_images/processing_8_1.png" src="_images/processing_8_1.png" />
+<img alt="_images/processing_6_0.png" src="_images/processing_6_0.png" />
+<img alt="_images/processing_6_1.png" src="_images/processing_6_1.png" />
 </div>
 </div>
 </div>
@@ -455,9 +428,7 @@
 <p>The labels correspond to the following sleep states:</p>
 <p>(undefined = -1, wake = 0, N1 = 1, N2 = 2, N3 = 3, REM = 5)</p>
 <p>Non-REM sleep is divided into progressively deeper stages of sleep: stage N1, stage N2, and stage N3.</p>
-<p>As the authors never took note of what the -1 label referred to, we decided it made sense to remove these labels for our analysis</p>
-<div class="section" id="removing-the-1-labels-no-point-classifying-a-class-we-don-t-know-the-meaning-for">
-<h3>Removing the -1 labels: No point classifying a class we don’t know the meaning for<a class="headerlink" href="#removing-the-1-labels-no-point-classifying-a-class-we-don-t-know-the-meaning-for" title="Permalink to this headline">¶</a></h3>
+<p>As the authors never took note of what the -1 label referred to, we decided it made sense to remove these labels later for our analysis</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the labels for one subject</span>
@@ -501,7 +472,6 @@
 <p>The labels are given as:</p>
 <p>[time since PSG start, sleep state]</p>
 </div>
-</div>
 <hr class="docutils" />
 <div class="section" id="tip">
 <h2>Tip:<a class="headerlink" href="#tip" title="Permalink to this headline">¶</a></h2>
@@ -525,7 +495,10 @@ Index of X data where time less than or equal to 30:  1503
 <p>You will need to segment the data in some way to suit your approach.</p>
 <hr class="docutils" />
 </div>
+</div>
 <hr class="docutils" />
+<div class="section" id="data-processing">
+<h1>Data Processing<a class="headerlink" href="#data-processing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="processing-the-data-so-we-can-use-tsfresh-to-extract-the-time-series-features">
 <h2>Processing the data so we can use tsfresh to extract the time series features<a class="headerlink" href="#processing-the-data-so-we-can-use-tsfresh-to-extract-the-time-series-features" title="Permalink to this headline">¶</a></h2>
 <p>Our first step was to get the full set of patient IDs which would be needed throughout the data processing</p>
@@ -846,8 +819,8 @@ Interpolating hr feature for subject 46343
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/processing_34_0.png" src="_images/processing_34_0.png" />
-<img alt="_images/processing_34_1.png" src="_images/processing_34_1.png" />
+<img alt="_images/processing_33_0.png" src="_images/processing_33_0.png" />
+<img alt="_images/processing_33_1.png" src="_images/processing_33_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
