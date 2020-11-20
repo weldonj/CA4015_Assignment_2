@@ -167,6 +167,11 @@
    Multi-Label Classifier
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#evaluation-of-model-performances">
+   Evaluation of Model Performances
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -471,6 +476,11 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-of-model-performances">
+   Evaluation of Model Performances
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -572,13 +582,11 @@ Requirement already satisfied: immutables&gt;=0.9 in /usr/local/lib/python3.6/di
 </div>
 </div>
 </div>
-<p>##<strong>Modelling the Windows as Independent Data Points</strong>##</p>
-<p>This next part of the notebook involves looking at the interpolated data chunks as independent separate data points with the time element and patient ID removed. The model performance from this dataset will be a true indicator of how important the time series element is to classifying a patient’s sleep state, given only their motion and heart rate for that given window. It’s expected that this will result in an impaired model performance compared to the classification of the data with extracted features. Although an improvement would lead to the hypothesis that sleep classification only requires a static model of independent data points.</p>
 </div>
 </div>
 <div class="section" id="read-in-our-windowed-features-and-their-matching-labels-prepared-in-our-previous-data-processing">
 <h2>Read in our windowed features and their matching labels prepared in our previous data processing<a class="headerlink" href="#read-in-our-windowed-features-and-their-matching-labels-prepared-in-our-previous-data-processing" title="Permalink to this headline">¶</a></h2>
-<p>In this approach we are using the original motion and heart rate features that were windowed at the end of our data processing operation. The time and ID columns are dropped from the dataframe as we are modelling purely based on the heart rate and motion features.</p>
+<p>This next part of the notebook involves looking at the interpolated data chunks as independent separate data points with the time element and patient ID removed, and no extracted features. The model performance from this dataset will be a true indicator of how important the time series element is to classifying a patient’s sleep state, given only their motion and heart rate for that given window. It’s expected that this will result in an impaired model performance compared to the classification of the data with extracted features. Although an improvement would lead to the hypothesis that sleep classification only requires a static model of independent data points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -674,7 +682,7 @@ Full Set Labels
 </div>
 <div class="section" id="sklearn-binary-data-classifier">
 <h1>Sklearn - Binary Data Classifier<a class="headerlink" href="#sklearn-binary-data-classifier" title="Permalink to this headline">¶</a></h1>
-<p>First, we will attempt to classify the data points as being either “Wake” or “Sleep”. The next cell will create a dataset which will replace any label greater than 0 with a 1, so 0 still represents “Wake”, while 1 represents “Sleep”.</p>
+<p>First, we will attempt to classify the data points as being either “Wake” or “Sleep”. The next cell will create a dataset which will replace any label greater than 0 with a 1. Now, 0 still represents “Wake”, while 1 represents “Sleep”.</p>
 <p>Let’s now implement a simple classifier using our new <strong>binary</strong> dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -860,7 +868,7 @@ Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.488491 to fit
 </pre></div>
 </div>
-<img alt="_images/classification_25_1.png" src="_images/classification_25_1.png" />
+<img alt="_images/classification_24_1.png" src="_images/classification_24_1.png" />
 </div>
 </div>
 </div>
@@ -1134,7 +1142,7 @@ weighted avg       0.87      0.91      0.87      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_31_0.png" src="_images/classification_31_0.png" />
+<img alt="_images/classification_30_0.png" src="_images/classification_30_0.png" />
 </div>
 </div>
 <p>The Decision Tree, and by extension the Random Forest algorithm, appear to be the best performing models for the binary classification.</p>
@@ -1175,6 +1183,7 @@ weighted avg       0.87      0.91      0.87      6605
 </div>
 </div>
 </div>
+<p>Using AutoML yields an impressive test accuracy of ~0.93, but is still outperformed slightly by the sklearn RF.</p>
 </div>
 <div class="section" id="nested-cross-validation">
 <h2>Nested Cross Validation<a class="headerlink" href="#nested-cross-validation" title="Permalink to this headline">¶</a></h2>
@@ -1942,6 +1951,7 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 </div>
+<p>The ensemble AutoML algorithm continues to compete with the best performing sklearn algorithm for all label sets.</p>
 </div>
 </div>
 <div class="section" id="classification-of-windowed-time-series-data-with-extracted-features">
@@ -3601,7 +3611,7 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_72_0.png" src="_images/classification_72_0.png" />
+<img alt="_images/classification_73_0.png" src="_images/classification_73_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -4148,7 +4158,7 @@ weighted avg       0.92      0.93      0.91      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_92_0.png" src="_images/classification_92_0.png" />
+<img alt="_images/classification_93_0.png" src="_images/classification_93_0.png" />
 </div>
 </div>
 <p>Classification on binary labelled data with extracted features yielded improved results in accuracy compared to that in the independent data point model earlier in the notebook. As shown, with the exception of Naive Bayes, all the algorithms displayed accuracy of above 90%. Decision Tree and Random Forest performed well again but K-nearest neighbours had the highest accuracy for this dataset with an accuracy of &gt; 95%. Upon inspection of the confusion matrix, there is no indication of the model guessing “Sleep” for all data points as shown in the false predictions for “Wake”.</p>
@@ -4474,7 +4484,7 @@ weighted avg       0.70      0.73      0.67      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_106_0.png" src="_images/classification_106_0.png" />
+<img alt="_images/classification_107_0.png" src="_images/classification_107_0.png" />
 </div>
 </div>
 <p>The models’ accuracies decrease as another label is added to the classification. K-Nearest Neighbours is the only model to achieve an accuracy of &gt; 0.9, with Decision Tree and RF closely following behind it.</p>
@@ -4928,7 +4938,7 @@ weighted avg       0.47      0.51      0.46      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_122_0.png" src="_images/classification_122_0.png" />
+<img alt="_images/classification_123_0.png" src="_images/classification_123_0.png" />
 </div>
 </div>
 <p>As expected, the models’ accuracies deteriorate again with the inclusion of the full label to the classification. Again, Decision Tree and Random Forest return high accuracies of ~0.8 but K-Nearest Neighbours is the most accurate with a score of 0.86.</p>
@@ -4961,11 +4971,13 @@ weighted avg       0.47      0.51      0.46      6605
 </div>
 </div>
 </div>
-<p>#Evaluation of Model Performances
-As expected, we observe an improvement of model accuracy with addition of time series as opposed to taking each window as independent data points. An important note is that we acknowledge that the inclusion of patient ID in the time series classification model too but a look into feature significances shows how important time is.
+</div>
+</div>
+<div class="section" id="evaluation-of-model-performances">
+<h1>Evaluation of Model Performances<a class="headerlink" href="#evaluation-of-model-performances" title="Permalink to this headline">¶</a></h1>
+<p>As expected, we observe an improvement of model accuracy with addition of time series as opposed to taking each window as independent data points. An important note is that we acknowledge that the inclusion of patient ID in the time series classification model too but a look into feature significances still shows how important time is to the models.
 The models used can make an accurate prediction on sleep state given that window’s motion and heart rate, but the information from all the data preceding it is very important in maximising model performance and returning high accuracy of predictions.</p>
 <p>K-Nearest Neighbours was the best performing algorithm for the extracted feature data across two, three and five-label datasets. Benefits of this include that K-NN algorithm is very simple to understand and equally easy to implement. To classify the new data point K-NN algorithm reads through whole dataset to find out K nearest neighbors and classifies that point with the mode of the neighbours’ labels. It’s suitable for this assignment due to its ease to adjust to multi-class problems. KNN has no capability of handling missing information, which fortunately wasn’t a problem in the datasets we used. Downsides to this model use is its speed and efficiency as the dataset grows. Generally, imbalanced data causes problems for this algorithm as the majority label is given prefernce leading to wrong predictions for the less common labels, but inspection of the confusion matrices of KNN shows that the predictions were quite balanced.</p>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
