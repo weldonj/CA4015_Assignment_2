@@ -57,8 +57,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Summary and Learning Outcomes" href="Summary_Conclusion.html" />
-    <link rel="prev" title="Data Preprocessing" href="processing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -117,9 +115,9 @@
   Classification Model
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="classification.html">
    Classification of windowed time series
    <strong>
     without
@@ -128,44 +126,44 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-binary-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-binary-data-classifier">
    Sklearn - Binary Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-three-label-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-three-label-data-classifier">
    Sklearn - Three-Label Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#sklearn-multi-label-data-classifier">
+  <a class="reference internal" href="classification.html#sklearn-multi-label-data-classifier">
    Sklearn - Multi-Label Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#classification-of-windowed-time-series-data-with-extracted-features">
+  <a class="reference internal" href="classification.html#classification-of-windowed-time-series-data-with-extracted-features">
    <strong>
     Classification of Windowed Time Series Data with Extracted features
    </strong>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#pca-of-extracted-features">
+  <a class="reference internal" href="classification.html#pca-of-extracted-features">
    PCA of Extracted Features
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#binary-data-classifier">
+  <a class="reference internal" href="classification.html#binary-data-classifier">
    Binary Data Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#three-label-classifier">
+  <a class="reference internal" href="classification.html#three-label-classifier">
    Three-Label Classifier
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#multi-label-classifier">
+  <a class="reference internal" href="classification.html#multi-label-classifier">
    Multi-Label Classifier
   </a>
  </li>
@@ -221,7 +219,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/classification.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/3classification.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -246,7 +244,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/classification.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/3classification.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -298,7 +296,9 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sklearn-binary-data-classifier">
-   Sklearn - Binary Data Classifier
+   <strong>
+    Sklearn - Binary Data Classifier
+   </strong>
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -340,7 +340,9 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sklearn-three-label-data-classifier">
-   Sklearn - Three-Label Data Classifier
+   <strong>
+    Sklearn - Three-Label Data Classifier
+   </strong>
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -372,7 +374,9 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sklearn-multi-label-data-classifier">
-   Sklearn - Multi-Label Data Classifier
+   <strong>
+    Sklearn - Multi-Label Data Classifier
+   </strong>
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -403,9 +407,9 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#classification-of-windowed-time-series-data-with-extracted-features">
+  <a class="reference internal nav-link" href="#extracted-features">
    <strong>
-    Classification of Windowed Time Series Data with Extracted features
+    Extracted features
    </strong>
   </a>
  </li>
@@ -474,6 +478,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation-of-model-performances">
+   Evaluation of Model Performances
+  </a>
  </li>
 </ul>
 
@@ -677,7 +686,7 @@ Full Set Labels
 </div>
 </div>
 <div class="section" id="sklearn-binary-data-classifier">
-<h1>Sklearn - Binary Data Classifier<a class="headerlink" href="#sklearn-binary-data-classifier" title="Permalink to this headline">¶</a></h1>
+<h1><strong>Sklearn - Binary Data Classifier</strong><a class="headerlink" href="#sklearn-binary-data-classifier" title="Permalink to this headline">¶</a></h1>
 <p>First, we will attempt to classify the data points as being either “Wake” or “Sleep”. The next cell will create a dataset which will replace any label greater than 0 with a 1, so 0 still represents “Wake”, while 1 represents “Sleep”.</p>
 <p>Let’s now implement a simple classifier using our new <strong>binary</strong> dataset.</p>
 <div class="cell docutils container">
@@ -864,7 +873,7 @@ Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.488491 to fit
 </pre></div>
 </div>
-<img alt="_images/classification_25_1.png" src="_images/classification_25_1.png" />
+<img alt="_images/3classification_25_1.png" src="_images/3classification_25_1.png" />
 </div>
 </div>
 </div>
@@ -1138,7 +1147,7 @@ weighted avg       0.87      0.91      0.87      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_31_0.png" src="_images/classification_31_0.png" />
+<img alt="_images/3classification_31_0.png" src="_images/3classification_31_0.png" />
 </div>
 </div>
 <p>The Decision Tree, and by extension the Random Forest algorithm, appear to be the best performing models for the binary classification.</p>
@@ -1229,7 +1238,7 @@ weighted avg       0.87      0.91      0.87      6605
 </div>
 </div>
 <div class="section" id="sklearn-three-label-data-classifier">
-<h1>Sklearn - Three-Label Data Classifier<a class="headerlink" href="#sklearn-three-label-data-classifier" title="Permalink to this headline">¶</a></h1>
+<h1><strong>Sklearn - Three-Label Data Classifier</strong><a class="headerlink" href="#sklearn-three-label-data-classifier" title="Permalink to this headline">¶</a></h1>
 <p>Let’s now implement classifiers using a <strong>WAKE / NREM / REM label</strong> dataset.</p>
 <p>First we’ll create a three label set, indicating 0 for awake, 1 for non-REM sleep and 2 for REM sleep</p>
 <div class="cell docutils container">
@@ -1539,7 +1548,7 @@ weighted avg       0.66      0.69      0.58      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_48_0.png" src="_images/classification_48_0.png" />
+<img alt="_images/3classification_48_0.png" src="_images/3classification_48_0.png" />
 </div>
 </div>
 </div>
@@ -1574,7 +1583,7 @@ weighted avg       0.66      0.69      0.58      6605
 </div>
 </div>
 <div class="section" id="sklearn-multi-label-data-classifier">
-<h1>Sklearn - Multi-Label Data Classifier<a class="headerlink" href="#sklearn-multi-label-data-classifier" title="Permalink to this headline">¶</a></h1>
+<h1><strong>Sklearn - Multi-Label Data Classifier</strong><a class="headerlink" href="#sklearn-multi-label-data-classifier" title="Permalink to this headline">¶</a></h1>
 <p>Let’s now implement a simple multiclass classifier using our <strong>original multi-label</strong> dataset</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1912,7 +1921,7 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_61_0.png" src="_images/classification_61_0.png" />
+<img alt="_images/3classification_61_0.png" src="_images/3classification_61_0.png" />
 </div>
 </div>
 </div>
@@ -1946,8 +1955,8 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 </div>
-<div class="section" id="classification-of-windowed-time-series-data-with-extracted-features">
-<h1><strong>Classification of Windowed Time Series Data with Extracted features</strong><a class="headerlink" href="#classification-of-windowed-time-series-data-with-extracted-features" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extracted-features">
+<h1><strong>Extracted features</strong><a class="headerlink" href="#extracted-features" title="Permalink to this headline">¶</a></h1>
 <p>We will now be performing classification on the extracted feature dataset and observing the model results. This is time series classification as the time and ID columns are now included and the many extra features that TSFresh has provided have encoded information in each row about the time series. We can now treat it like any normal non-time series dataset while still being sure the time series information is retained for our analysis and classification.</p>
 <p>Again, we will perform classification with the three different label sets of Binary: Wake/Sleep, Three classes: Wake, Non-REM Sleep and REM Sleep and finally with all original labels of sleep classes: (0, 1, 2, 3, 5).</p>
 <div class="cell docutils container">
@@ -3603,7 +3612,7 @@ weighted avg       0.45      0.51      0.37      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_70_0.png" src="_images/classification_70_0.png" />
+<img alt="_images/3classification_70_0.png" src="_images/3classification_70_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3839,7 +3848,7 @@ importance
 </div>
 </div>
 </div>
-<p>We decided that for our situation, with training not taking particularly long without PCA and losing more than 20% of the variance with PCA, it wasn’t the right way to go and instead we would continue to simply use the full amount of features. Interestingly we also</p>
+<p>We decided that for our situation, with training not taking particularly long without PCA and losing more than 20% of the variance with PCA, it wasn’t the right way to go and instead we would continue to simply use the full amount of features</p>
 </div>
 </div>
 <div class="section" id="binary-data-classifier">
@@ -4150,7 +4159,7 @@ weighted avg       0.92      0.93      0.91      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_90_0.png" src="_images/classification_90_0.png" />
+<img alt="_images/3classification_90_0.png" src="_images/3classification_90_0.png" />
 </div>
 </div>
 <p>Classification on binary labelled data with extracted features yielded improved results in accuracy compared to that in the independent data point model earlier in the notebook. As shown, with the exception of Naive Bayes, all the algorithms displayed accuracy of above 90%. Decision Tree and Random Forest performed well again but K-nearest neighbours had the highest accuracy for this dataset with an accuracy of 96.1%. Upon inspection of the confusion matrix, there is no indication of the model guessing “Sleep” for all data points as shown in the false predictions for “Wake”.</p>
@@ -4476,7 +4485,7 @@ weighted avg       0.70      0.73      0.67      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_104_0.png" src="_images/classification_104_0.png" />
+<img alt="_images/3classification_104_0.png" src="_images/3classification_104_0.png" />
 </div>
 </div>
 <p>The models’ accuracies decrease as another label is added to the classification. K-Nearest Neighbours is the only model to achieve an accuracy of &gt; 0.9, with Decision Tree and RF closely following behind it.</p>
@@ -4930,7 +4939,7 @@ weighted avg       0.47      0.51      0.46      6605
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_120_0.png" src="_images/classification_120_0.png" />
+<img alt="_images/3classification_120_0.png" src="_images/3classification_120_0.png" />
 </div>
 </div>
 <p>As expected, the models’ accuracies deteriorate again with the inclusion of the full label to the classification. Again, Decision Tree and Random Forest return high accuracies of ~0.8 but K-Nearest Neighbours is the most accurate with a score of 0.86.</p>
@@ -4963,11 +4972,13 @@ weighted avg       0.47      0.51      0.46      6605
 </div>
 </div>
 </div>
-<p>#Evaluation of Model Performances
-As expected, we observe an improvement of model accuracy with addition of time series as opposed to taking each window as independent data points. An important note is that we acknowledge that the inclusion of patient ID in the time series classification model too but a look into feature significances shows how important time is.
-The models used can make an accurate prediction on sleep state given that window’s motion and heart rate, but the information from all the data preceding it is very important in maximising model performance and returning high accuracy of predictions.</p>
-<p>K-Nearest Neighbours was the best performing algorithm for the extracted feature data across two, three and five-label datasets. Benefits of this include that K-NN algorithm is very simple to understand and equally easy to implement. To classify the new data point K-NN algorithm reads through whole dataset to find out K nearest neighbors and classifies that point with the mode of the neighbours’ labels. It’s suitable for this assignment due to its ease to adjust to multi-class problems. KNN has no capability of handling missing information, which fortunately wasn’t a problem in the datasets we used. Downsides to this model use is its speed and efficiency as the dataset grows. Generally, imbalanced data causes problems for this algorithm as the majority label is given prefernce leading to wrong predictions for the less common labels, but inspection of the confusion matrices of KNN shows that the predictions were quite balanced.</p>
 </div>
+</div>
+<div class="section" id="evaluation-of-model-performances">
+<h1>Evaluation of Model Performances<a class="headerlink" href="#evaluation-of-model-performances" title="Permalink to this headline">¶</a></h1>
+<p>As expected, we observe an improvement of model accuracy with addition of time series as opposed to taking each window as independent data points. An important note is that we acknowledge that the inclusion of patient ID in the time series classification model too but a look into feature significances shows how important time is.
+The models used can make an accurate prediction on sleep state given that window’s motion and heart rate, but the information from all the data preceding it is very important in maximising model performance and returning high accuracy of predictions.
+K-Nearest Neighbours was the best performing algorithm for the extracted feature data across two, three and five-label datasets. Benefits of this include that K-NN algorithm is very simple to understand and equally easy to implement. To classify the new data point K-NN algorithm reads through whole dataset to find out K nearest neighbors and classifies that point with the mode of the neighbours’ labels. It’s suitable for this assignment due to its ease to adjust to multi-class problems. KNN has no capability of handling missing information, which fortunately wasn’t a problem in the datasets we used. Downsides to this model use is its speed and efficiency as the dataset grows.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -4998,8 +5009,6 @@ The models used can make an accurate prediction on sleep state given that window
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="processing.html" title="previous page">Data Preprocessing</a>
-    <a class='right-next' id="next-link" href="Summary_Conclusion.html" title="next page">Summary and Learning Outcomes</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
