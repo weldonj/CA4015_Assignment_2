@@ -5,6 +5,10 @@
   chapters:
   - file: processing
 
+- part: Classification Model
+  chapters:
+  - file: classification  
+
 - part: Concluding Section
   chapters:
   - file: Summary_Conclusion
