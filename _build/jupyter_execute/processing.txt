@@ -42,9 +42,6 @@ np.unique(labels[:,1])
 # Show me a sample of the labels
 print(labels[520:530,:])
 
-print("First 10 label times (sec): ", labels[:10,0])
-print("Index of X data where time less than or equal to 30: ", np.max(np.nonzero(x_clean[:,0] <= 30)))
-
 # Get a set of patient ids
 FULL_SET = []
 

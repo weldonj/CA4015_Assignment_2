@@ -121,7 +121,7 @@ from sklearn.svm import SVC
 
 def algorithm_comparison(X_train, y_train, X_test, y_test, n_splits=10):
     models = []
-    models.append(("LOGISTIC REGRESSION", LogisticRegression()))
+    models.append(("LOGISTIC REGRESSION", LogisticRegression(max_iter=1000)))
     models.append(("LINEAR DISCRIMINANT AANALYSIS", LinearDiscriminantAnalysis()))
     models.append(("K NEAREST NEIGHBOURS", KNeighborsClassifier()))
     models.append(("NAIVE BAYES", GaussianNB()))
@@ -185,7 +185,6 @@ y_hat = automl.predict(X_test)
 test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
 print("Test Accuracy score {0}".format(test_acc))
 
-# automatic nested cross-validation for random forest on a classification dataset
 from numpy import mean
 from numpy import std
 from sklearn.datasets import make_classification
@@ -201,17 +200,17 @@ def nested_cross_val(X_train, y_train, model=KNeighborsClassifier()):
     cv_inner = KFold(n_splits=3, shuffle=True, random_state=1)
 
     # define search space
-    pgrid = {"n_neighbors": [5, 10, 30, 70, 100],
+    pgrid = {"n_neighbors": [2, 5, 10, 30],
               "weights": ["uniform", "distance"],
-              "algorithm": ["auto", "ball_tree", "kd_tree", "brute"],
-              "leaf_size": [15, 30, 60, 90],
+              "algorithm": ["auto", "ball_tree", "kd_tree"],
+              "leaf_size": [15, 30],
               "p": [1, 2, 4],
               }
 
     # define search
     search = GridSearchCV(model, pgrid, scoring='accuracy', n_jobs=1, cv=cv_inner, refit=True)
     # configure the cross-validation procedure
-    cv_outer = KFold(n_splits=10, shuffle=True, random_state=1)
+    cv_outer = KFold(n_splits=5, shuffle=True, random_state=1)
     # execute the nested cross-validation
     scores = cross_val_score(search, X_train, y_train, scoring='accuracy', cv=cv_outer, n_jobs=-1)
     # report performance
@@ -245,7 +244,6 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 clf.fit(X_train,y_train)
 importance = (clf.feature_importances_)
 
-# using list comprehension + enumerate() 
 # index of matching element 
 res = [idx for idx, val in enumerate(importance) if val > 0] 
 res_feats = [full_set_features.columns[i] for i in res]
@@ -311,7 +309,7 @@ print("\nThe list of features with importance: ")
 print(res_feats)
 print("importance\n", importance)
 
-#nested_vs_non_plot(X_train, y_train, title="Non-Nested and Nested Cross Validation on Multi-label Sleep Stage Dataset")
+#nested_cross_val(X_train, y_train)
 
 names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
 
@@ -342,147 +340,6 @@ extracted_labels = pd.read_csv('/content/drive/My Drive/CA4015/sleep_classify/ex
 extracted_features = extracted_features.rename(columns={'Unnamed: 0': 'id', 'Unnamed: 1': 'time'})
 
 extracted_features.head()
-
-# first we'll create a binary label set, indicating 0 for awake and 1 for asleep
-
-e_binary_label_array = extracted_labels['1'].ravel().copy()
-e_binary_label_array[e_binary_label_array > 0] = 1
-print(np.unique(e_binary_label_array))
-print(e_binary_label_array.shape)
-
-print("Extracted Features", "\n", extracted_features)
-print("\nExtracted Labels", "\n", e_binary_label_array)
-
-from sklearn.model_selection import train_test_split
-
-# Splitting our data into training and testing.
-
-X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_binary_label_array, test_size=0.25)
-
-from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeClassifier
-
-clf = DecisionTreeClassifier(random_state=0)
-
-scores = cross_val_score(clf, X_train, y_train, cv=5)
-print('The mean score and the 95% confidence interval of the score estimate are given by:')
-print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-
-# Training the model in a standard way allows to to view the feature importance
-# for this model alone.
-clf.fit(X_train,y_train)
-importance = (clf.feature_importances_)
-
-# using list comprehension + enumerate() 
-# index of matching element 
-res = [idx for idx, val in enumerate(importance) if val > 0] 
-res_feats = [extracted_features.columns[i] for i in res]
-  
-# print result 
-print("\nThe list of features with importance: ") 
-
-print(res_feats)
-#print("importance\n", importance)
-
-#nested_cross_val(X_train, y_train)
-
-names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
-
-plot_algo_comparison(names, results, title="Algorithm Comparison on Wake/NREM/REM Label Data With Extracted Features")
-
-import autosklearn.classification
-import sklearn
-# configure auto-sklearn
-automl = autosklearn.classification.AutoSklearnClassifier(
-          time_left_for_this_task=120, # run auto-sklearn for at most 2min
-          per_run_time_limit=30, # spend at most 30 sec for each model training
-          )
-
-# train model(s)
-automl.fit(X_train, y_train)
-
-# evaluate
-y_hat = automl.predict(X_test)
-test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
-print("Test Accuracy score {0}".format(test_acc))
-
-e_three_label_array = extracted_labels['1'].ravel().copy()
-e_three_label_array[(e_three_label_array == 1) | (e_three_label_array == 2) | (e_three_label_array == 3)] = 1
-e_three_label_array[e_three_label_array == 5] = 2
-
-print(np.unique(three_label_array))
-print(three_label_array.shape)
-
-from sklearn.model_selection import train_test_split
-
-# Splitting our data into training and testing.
-
-X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_three_label_array, test_size=0.25)
-
-
-
-e_label_array = extracted_labels['1'].ravel()
-print(e_label_array.shape)
-np.unique(e_label_array)
-
-extracted_features = extracted_features.dropna(axis='columns')
-extracted_labels["1"].unique()
-
-print("Extracted Features", "\n", extracted_features)
-print("\nExtracted Labels", "\n", extracted_labels)
-
-from sklearn.model_selection import train_test_split
-
-# Splitting our data into training and testing.
-
-X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_label_array, test_size=0.25)
-
-from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeClassifier
-
-clf = DecisionTreeClassifier(random_state=0)
-
-scores = cross_val_score(clf, X_train, y_train, cv=5)
-print('The mean score and the 95% confidence interval of the score estimate are given by:')
-print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-
-# Training the model in a standard way allows to to view the feature importance
-# for this model alone.
-clf.fit(X_train,y_train)
-importance = (clf.feature_importances_)
-
-# using list comprehension + enumerate() 
-# index of matching element 
-res = [idx for idx, val in enumerate(importance) if val > 0] 
-res_feats = [extracted_features.columns[i] for i in res]
-  
-# print result 
-print("\nThe list of features with importance: ") 
-
-print(res_feats)
-#print("importance\n", importance)
-
-#nested_cross_val(X_train, y_train)
-
-names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
-
-plot_algo_comparison(names, results, title="Algorithm Comparison on Wake/NREM/REM Label Data With Extracted Features")
-
-import autosklearn.classification
-import sklearn
-# configure auto-sklearn
-automl = autosklearn.classification.AutoSklearnClassifier(
-          time_left_for_this_task=120, # run auto-sklearn for at most 2min
-          per_run_time_limit=30, # spend at most 30 sec for each model training
-          )
-
-# train model(s)
-automl.fit(X_train, y_train)
-
-# evaluate
-y_hat = automl.predict(X_test)
-test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
-print("Test Accuracy score {0}".format(test_acc))
 
 feats = extracted_features.columns[2:]
 feats
@@ -536,7 +393,6 @@ pca3d_df
 from sklearn.model_selection import train_test_split
 
 # Splitting our data into training and testing.
-# Please don't ever train on your test data, that's a big no no!
 X_train, X_test, y_train, y_test = train_test_split(pca3d_df, e_label_array, test_size=0.25)
 
 from sklearn.model_selection import cross_val_score
@@ -563,6 +419,192 @@ print("\nThe list of features with importance: ")
 
 print(res_feats)
 print("importance\n", importance)
+
+import autosklearn.classification
+import sklearn
+# configure auto-sklearn
+automl = autosklearn.classification.AutoSklearnClassifier(
+          time_left_for_this_task=120, # run auto-sklearn for at most 2min
+          per_run_time_limit=30, # spend at most 30 sec for each model training
+          )
+
+# train model(s)
+automl.fit(X_train, y_train)
+
+# evaluate
+y_hat = automl.predict(X_test)
+test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
+print("Test Accuracy score {0}".format(test_acc))
+
+# first we'll create a binary label set, indicating 0 for awake and 1 for asleep
+
+e_binary_label_array = extracted_labels['1'].ravel().copy()
+e_binary_label_array[e_binary_label_array > 0] = 1
+print(np.unique(e_binary_label_array))
+print(e_binary_label_array.shape)
+
+print("Extracted Features", "\n", extracted_features)
+print("\nExtracted Labels", "\n", e_binary_label_array)
+
+from sklearn.model_selection import train_test_split
+
+# Splitting our data into training and testing.
+
+X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_binary_label_array, test_size=0.25)
+
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier(random_state=0)
+
+scores = cross_val_score(clf, X_train, y_train, cv=5)
+print('The mean score and the 95% confidence interval of the score estimate are given by:')
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+# Training the model in a standard way allows to to view the feature importance
+# for this model alone.
+clf.fit(X_train,y_train)
+importance = (clf.feature_importances_)
+
+# using list comprehension + enumerate() 
+# index of matching element 
+res = [idx for idx, val in enumerate(importance) if val > 0] 
+res_feats = [extracted_features.columns[i] for i in res]
+  
+# print result 
+print("\nThe list of features with importance: ") 
+
+print(res_feats)
+#print("importance\n", importance)
+
+#nested_cross_val(X_train, y_train)
+
+names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
+
+plot_algo_comparison(names, results, title="Algorithm Comparison on Wake/Sleep Label Data With Extracted Features")
+
+import autosklearn.classification
+import sklearn
+# configure auto-sklearn
+automl = autosklearn.classification.AutoSklearnClassifier(
+          time_left_for_this_task=120, # run auto-sklearn for at most 2min
+          per_run_time_limit=30, # spend at most 30 sec for each model training
+          )
+
+# train model(s)
+automl.fit(X_train, y_train)
+
+# evaluate
+y_hat = automl.predict(X_test)
+test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
+print("Test Accuracy score {0}".format(test_acc))
+
+e_three_label_array = extracted_labels['1'].ravel().copy()
+e_three_label_array[(e_three_label_array == 1) | (e_three_label_array == 2) | (e_three_label_array == 3)] = 1
+e_three_label_array[e_three_label_array == 5] = 2
+
+print(np.unique(three_label_array))
+print(three_label_array.shape)
+
+from sklearn.model_selection import train_test_split
+
+# Splitting our data into training and testing.
+
+X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_three_label_array, test_size=0.25)
+
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier(random_state=0)
+
+scores = cross_val_score(clf, X_train, y_train, cv=5)
+print('The mean score and the 95% confidence interval of the score estimate are given by:')
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+# Training the model in a standard way allows to to view the feature importance
+# for this model alone.
+clf.fit(X_train,y_train)
+importance = (clf.feature_importances_)
+
+# using list comprehension + enumerate() 
+# index of matching element 
+res = [idx for idx, val in enumerate(importance) if val > 0] 
+res_feats = [extracted_features.columns[i] for i in res]
+  
+# print result 
+print("\nThe list of features with importance: ") 
+
+print(res_feats)
+#print("importance\n", importance)
+
+#nested_cross_val(X_train, y_train)
+
+names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
+
+plot_algo_comparison(names, results, title="Algorithm Comparison on Wake/NREM/REM Label Data With Extracted Features")
+
+import autosklearn.classification
+import sklearn
+# configure auto-sklearn
+automl = autosklearn.classification.AutoSklearnClassifier(
+          time_left_for_this_task=120, # run auto-sklearn for at most 2min
+          per_run_time_limit=30, # spend at most 30 sec for each model training
+          )
+
+# train model(s)
+automl.fit(X_train, y_train)
+
+# evaluate
+y_hat = automl.predict(X_test)
+test_acc = sklearn.metrics.accuracy_score(y_test, y_hat)
+print("Test Accuracy score {0}".format(test_acc))
+
+e_label_array = extracted_labels['1'].ravel()
+print(e_label_array.shape)
+np.unique(e_label_array)
+
+extracted_features = extracted_features.dropna(axis='columns')
+extracted_labels["1"].unique()
+
+print("Extracted Features", "\n", extracted_features)
+print("\nExtracted Labels", "\n", extracted_labels)
+
+from sklearn.model_selection import train_test_split
+
+# Splitting our data into training and testing.
+
+X_train, X_test, y_train, y_test = train_test_split(extracted_features, e_label_array, test_size=0.25)
+
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier(random_state=0)
+
+scores = cross_val_score(clf, X_train, y_train, cv=5)
+print('The mean score and the 95% confidence interval of the score estimate are given by:')
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+# Training the model in a standard way allows to to view the feature importance
+# for this model alone.
+clf.fit(X_train,y_train)
+importance = (clf.feature_importances_)
+
+# using list comprehension + enumerate() 
+# index of matching element 
+res = [idx for idx, val in enumerate(importance) if val > 0] 
+res_feats = [extracted_features.columns[i] for i in res]
+  
+# print result 
+print("\nThe list of features with importance: ") 
+
+print(res_feats)
+#print("importance\n", importance)
+
+#nested_cross_val(X_train, y_train)
+
+names, results = algorithm_comparison(X_train, y_train, X_test, y_test)
+
+plot_algo_comparison(names, results, title="Algorithm Comparison on Multi-Label Data With Extracted Features")
 
 import autosklearn.classification
 import sklearn
