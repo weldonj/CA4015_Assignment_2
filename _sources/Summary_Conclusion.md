@@ -2,7 +2,7 @@
 
 We are confident that we have managed to create some useful models for the classification of sleep status in any potential unseen subject data that was collected in a similar way to the given subject data. We have identified what cleaning and processing was needed on the given subject data to get it prepared for the classification.
 
-We also used many different models and training methods, with simple models and also combined within ensemble AutoML models. We tested their performance and analysed which ones worked best and why. For each model and method we traiend and tested them on binary labels, three labels, and also the full five labels.
+We also used many different models and training methods, with simple models and also combined within ensemble AutoML models. We tested their performance and analysed which ones worked best and why. For each model and method we trained and tested them on binary labels, three labels, and also the full five labels.
 
 We found that with our initial classification model, trained on the raw data, "decision tree" and "random forest" were consistently the best options, with the highest accuracy scores for their predictions. "Linear discriminant analysis" and "Linear regression" had a tendency to simply predict that every datapoint was asleep in the binary model, as it provided a high accuracy. But we knew that this is essentially a false accuracy score. Our confusion matrices showed us that this guessing was happening so we could then discount these models despite their high accuracy.
 
